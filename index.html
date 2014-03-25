@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+
+	<title></title>
+
+	<link rel="stylesheet" type="text/css" href="vendor/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="build/css/yarslider.min.css">
+
+	<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>-->
+	<script type="text/javascript" src="vendor/js/jquery.newest.min.js"></script>
+	<script type="text/javascript" src="build/js/yarslider.min.js"></script>
+
+	<script type="text/javascript">
+		$(function(){
+			$( ".slider" ).yarslider({
+				'startSlide': 1,
+				'auto': 1000,
+				'controlSelector': '.slider_controls',
+				'slideSelector': '.slide'
+			});
+
+			var slider = $('.slider').data('plugin_yarslider');
+		});
+
+	</script>
+</head> <!-- End Head -->
+
+<body>
+	<div class="container">
+		<div class="slider" data-slider-options='{"message":"Slider 1"}'>
+			<a class="slide" href="#">
+				<div class="image">
+					<img src="http://www.barrelny.com/wp-content/uploads/about-office-slide-pingpong2-800x500.jpg"/>
+				</div>
+			</a>
+			<a class="slide">
+				<div class="image">
+					<img src="http://www.barrelny.com/wp-content/uploads/about-office-slide-bookcase-800x500.jpg"/>
+				</div>
+			</a>
+		</div>
+		<div class="slider_controls">
+			<div class="pager prev" data-target="prev">&lsaquo;</div>
+			<div class="pager next" data-target="next">&rsaquo;</div>
+	 		<ul class="pager-list"></ul>
+	    </div>
+	</div> <!-- End .container -->
+
+	<div class="container">
+		<div class="slider" data-slider-options='{"message":"Slider 2"}'>
+			<a class="slide" href="#">
+				<div class="image">
+					<img src="http://www.barrelny.com/wp-content/uploads/about-office-slide-pingpong2-800x500.jpg"/>
+				</div>
+			</a>
+			<a class="slide">
+				<div class="image">
+					<img src="http://www.barrelny.com/wp-content/uploads/about-office-slide-bookcase-800x500.jpg"/>
+				</div>
+			</a>
+		</div>
+		<div class="slider_controls">
+			<div class="pager prev" data-target="prev">&lsaquo;</div>
+			<div class="pager next" data-target="next">&rsaquo;</div>
+	 		<ul class="pager-list"></ul>
+	    </div>
+	</div><!-- End .container
+
+</body> <!-- End Body -->
+
+</html>

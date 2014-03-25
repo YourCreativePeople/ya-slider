@@ -1,0 +1,142 @@
+.slider {
+	position: relative;
+	overflow:hidden;
+	/*display:none;*/
+	opacity: 0;
+	height: 500px;
+	width: 100%;
+
+	/* Fade in when Init finishes */
+	-webkit-transition:	opacity 400ms;
+   	   -moz-transition:	opacity 400ms;
+	    -ms-transition:	opacity 400ms;
+	     -o-transition:	opacity 400ms;
+		    transition: opacity 400ms;
+}
+
+.slide {
+	position:absolute;
+	display: block;
+	width: 100%;
+}
+
+	.slide .image {
+		width: 100%;
+		opacity: 1;
+	}
+
+		.slide .image img {
+			width: 100%;
+			opacity: 1;
+		}
+
+		/* Non-touch Image transition properties default
+			-- Set transition speed and type
+		*/
+		.slider.no-touch .slide .image {
+			-webkit-transform: scale(1.04);
+			   -moz-transform: scale(1.04);
+				-ms-transform: scale(1.04);
+				 -o-transform: scale(1.04);
+					transform: scale(1.04);
+
+			opacity: 0;
+		}
+
+		/* Non-touch Image transition properties */
+		.slider.no-touch .slide.active .image {
+			-webkit-transform: scale(1);
+			   -moz-transform: scale(1);
+				-ms-transform: scale(1);
+				 -o-transform: scale(1);
+					transform: scale(1);
+
+			opacity: 1;
+		}
+
+		.slider.no-touch .slide.transition-speed .image {
+			-webkit-transition:	all 400ms;
+		   	   -moz-transition:	all 400ms;
+			    -ms-transition:	all 400ms;
+			     -o-transition:	all 400ms;
+				    transition: all 400ms;
+		}
+
+	.slide .caption {
+		position: absolute;
+		opacity: 1;
+		color: white;
+		z-index: 9999;
+		top: 15px;
+		left: 15px;
+	}
+
+		/* Non-touch Caption transition properties default
+			-- Set transition speed and type
+		*/
+		.slider.no-touch .slide .caption {
+			-webkit-transform: translateX(5px);
+			   -moz-transform: translateX(5px);
+			    -ms-transform: translateX(5px);
+			     -o-transform: translateX(5px);
+					transform: translateX(5px);
+
+			-webkit-transition-delay: 200ms;
+			   -moz-transition-delay: 200ms;
+				-ms-transition-delay: 200ms;
+				 -o-transition-delay: 200ms;
+					transition-delay: 200ms;
+
+			opacity: 0;
+		}
+
+		/* Non-touch Caption transition properties */
+		.slider.no-touch .slide.active .caption {
+			-webkit-transform: translateX(0px);
+			   -moz-transform: translateX(0px);
+			    -ms-transform: translateX(0px);
+			     -o-transform: translateX(0px);
+					transform: translateX(0px);
+			opacity: 1;
+		}
+
+		.slider.no-touch .slide.transition-speed .caption {
+			-webkit-transition:	all 400ms;
+		   	   -moz-transition:	all 400ms;
+			    -ms-transition:	all 400ms;
+			     -o-transition:	all 400ms;
+				    transition: all 400ms;
+		}
+
+/* controls */
+
+.slider_controls .pager {
+	width: 100px;
+	height: 100px;
+	display: block;
+	background: blue;
+	padding-left: 31px;
+	box-sizing: border-box;
+	font-size: 100px;
+	line-height: 77px;
+	float: left;
+	margin-left: 5px;
+}
+
+.pager-list {
+	clear: both;
+}
+
+	.pager-list li {
+		width: 50px;
+		height: 50px;
+		display: block;
+		background: red;
+		padding-left: 19px;
+		box-sizing: border-box;
+		font-size: 25px;
+		line-height: 46px;
+		float: left;
+		margin-left: 2px;
+		margin-top: 5px;
+	}
