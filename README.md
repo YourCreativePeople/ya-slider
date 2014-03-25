@@ -6,7 +6,7 @@ Responsive touch slider with style. Kind of a fork of [bradbirdsall](https://git
 
 ### Description
 
-Ya Slider is quite similar to others out there, but has a few key differences. Basically it comes down to our designer wanting different transitions on desktop than on touch devices. He wanted it to fade nicely on mobile, and slide smoothly with 1:1 touch on mobile. We couldn't find anything out there that did what we needed, so we wrote our own (with touch event help from Swipe).
+Ya Slider is quite similar to others out there, but has a few key differences. Basically it comes down to our designer wanting different transitions on desktop than on touch devices. He wanted it to fade nicely on desktop, and slide smoothly with 1:1 touch on mobile. We couldn't find anything out there that did what we needed, so we wrote our own (with touch event help from Swipe).
 
 ### Dependencies
 
