@@ -15,6 +15,11 @@ You must run the following to develop for Ya-Slider. (If you just want to run it
 `npm install`
 
 This will install all dependencies. Ya-Slider builds with [GulpJS](http://gulpjs.com/) and uses [Express](http://expressjs.com/) for its development server.
+Simply run
+
+`gulp`
+
+to start develpment server and script combining.
 
 ### Easy Setup
 
