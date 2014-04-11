@@ -11,7 +11,7 @@ var gulp        = require('gulp'),
     less        = require('gulp-less'),
     minifyCSS   = require('gulp-minify-css');
 
-var EXPRESS_PORT = 4001;
+var EXPRESS_PORT = 4002;
 var EXPRESS_ROOT = __dirname;
 var LIVERELOAD_PORT = 35730;
 
@@ -41,7 +41,7 @@ gulp.task('lr', function () {
 
 gulp.task('js', function () {
     return gulp.src(paths.scripts)
-        // .pipe(uglify())
+        .pipe(uglify())
         .pipe(concat('yarslider.min.js'))
         .pipe(gulp.dest('build/js'));
 });
