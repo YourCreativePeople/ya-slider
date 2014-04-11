@@ -23,4 +23,52 @@ to start develpment server and script combining.
 
 ### Easy Setup
 
-Eventually I will put in instruction here once this project gets out of beta. (ie. don't use it yet)
+##### HTML structure
+
+`
+<div class="container">
+    <div class="slider">
+        <a class="slide">
+            <div class="image"></div>
+        </a>
+    </div>
+    <div class="slider_controls">
+        <div class="pager prev" data-target="prev">&lsaquo;</div>
+        <div class="pager next" data-target="next">&rsaquo;</div>
+        <ul class="pager-list"></ul>
+    </div>
+</div>
+`
+
+Please use the included stylesheet to make sure all the containers are styles correctly. You can actually put anything inside the "slide" container. It's quite flexible and content should just fill container.
+
+If you would like to add a caption that has a different animation on slide change, just add the following after the "image" container. You can control the animation in the css file.
+
+`
+<div class="caption"></div>
+`
+
+##### Javascript Init
+
+Put the following at the bottom of your page after you include both the js and css files for ya-slider. This will initiate the slider.
+
+`$( ".slider" ).yarslider();`
+
+### Config Options
+
+Ya-slider can take additional parameters on init.
+
+- **startSlide** Integer (default:0) - Start slide
+- **durationManual** Integer in ms - Duration for manual slide change (fade)
+- **durationAuto** Integer in ms - Duration for automatic slide change (fade)
+- **continuous** Boolean (default:true) - Wrap slideshow around ends
+- **disableScroll** Boolean - Allow/disallow scrolling while sliding
+- **stopPropogation** Boolean - Stop event propogation
+- **auto** Integer in ms - Automatic slideshow timer
+- **slideSelector** String - Slide selector class
+- **controlsSelector** String - Slide controls class
+- **slideChange** Function - Callback on slide change
+- **transitionEnd** Function - Callback on transition end
+- **initFinished** Function - Callback after init
+
+
