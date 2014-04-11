@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Ya-slider by YourCreativePeople</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Ya-slider</h1>
+        <p>Responsive touch slider with style</p>
+
+        <p class="view"><a href="https://github.com/YourCreativePeople/ya-slider">View the Project on GitHub <small>YourCreativePeople/ya-slider</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/YourCreativePeople/ya-slider/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/YourCreativePeople/ya-slider/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/YourCreativePeople/ya-slider">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="ya-slider" class="anchor" href="#ya-slider"><span class="octicon octicon-link"></span></a>ya-slider</h1>
+
+<p><strong>Yet Another Slider</strong></p>
+
+<p>Responsive touch slider with style. Kind of a fork of <a href="https://github.com/bradbirdsall">bradbirdsall</a>'s awesome <a href="https://github.com/bradbirdsall/Swipe" title="Swipe">SwipeJS</a> slider.</p>
+
+<h3>
+<a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>Description</h3>
+
+<p>Ya Slider is quite similar to others out there, but has a few key differences. Basically it comes down to our designer wanting different transitions on desktop than on touch devices. He wanted it to fade nicely on desktop, and slide smoothly with 1:1 touch on mobile. We couldn't find anything out there that did what we needed, so we wrote our own (with touch event help from Swipe).</p>
+
+<h3>
+<a name="dependencies" class="anchor" href="#dependencies"><span class="octicon octicon-link"></span></a>Dependencies</h3>
+
+<p>You must run the following to develop for Ya-Slider. (If you just want to run it, the files you need are in the build folder)</p>
+
+<p><code>npm install</code></p>
+
+<p>This will install all dependencies. Ya-Slider builds with <a href="http://gulpjs.com/">GulpJS</a> and uses <a href="http://expressjs.com/">Express</a> for its development server.
+Simply run</p>
+
+<p><code>gulp</code></p>
+
+<p>to start develpment server and script combining.</p>
+
+<h3>
+<a name="easy-setup" class="anchor" href="#easy-setup"><span class="octicon octicon-link"></span></a>Easy Setup</h3>
+
+<h5>
+<a name="html-structure" class="anchor" href="#html-structure"><span class="octicon octicon-link"></span></a>HTML structure</h5>
+
+<pre><code>&lt;div class="container"&gt;
+    &lt;div class="slider"&gt;
+        &lt;a class="slide"&gt;
+            &lt;div class="image"&gt;&lt;/div&gt;
+        &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="slider_controls"&gt;
+        &lt;div class="pager prev" data-target="prev"&gt;&amp;lsaquo;&lt;/div&gt;
+        &lt;div class="pager next" data-target="next"&gt;&amp;rsaquo;&lt;/div&gt;
+        &lt;ul class="pager-list"&gt;&lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Please use the included stylesheet to make sure all the containers are styles correctly. You can actually put anything inside the "slide" container. It's quite flexible and content should just fill container.</p>
+
+<p>If you would like to add a caption that has a different animation on slide change, just add the following after the "image" container. You can control the animation in the css file.</p>
+
+<p><code>&lt;div class="caption"&gt;&lt;/div&gt;</code></p>
+
+<h5>
+<a name="javascript-init" class="anchor" href="#javascript-init"><span class="octicon octicon-link"></span></a>Javascript Init</h5>
+
+<p>Put the following at the bottom of your page after you include both the js and css files for ya-slider. This will initiate the slider.</p>
+
+<p><code>$( ".slider" ).yarslider();</code></p>
+
+<h3>
+<a name="config-options" class="anchor" href="#config-options"><span class="octicon octicon-link"></span></a>Config Options</h3>
+
+<p>Ya-slider can take additional parameters on init.</p>
+
+<ul>
+<li>
+<strong>startSlide</strong> Integer (default:0) - Start slide</li>
+<li>
+<strong>durationManual</strong> Integer in ms - Duration for manual slide change (fade)</li>
+<li>
+<strong>durationAuto</strong> Integer in ms - Duration for automatic slide change (fade)</li>
+<li>
+<strong>continuous</strong> Boolean (default:true) - Wrap slideshow around ends</li>
+<li>
+<strong>disableScroll</strong> Boolean - Allow/disallow scrolling while sliding</li>
+<li>
+<strong>stopPropogation</strong> Boolean - Stop event propogation</li>
+<li>
+<strong>auto</strong> Integer in ms - Automatic slideshow timer</li>
+<li>
+<strong>slideSelector</strong> String - Slide selector class</li>
+<li>
+<strong>controlsSelector</strong> String - Slide controls class</li>
+<li>
+<strong>slideChange</strong> Function - Callback on slide change</li>
+<li>
+<strong>transitionEnd</strong> Function - Callback on transition end</li>
+<li>
+<strong>initFinished</strong> Function - Callback after init</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/YourCreativePeople">YourCreativePeople</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
