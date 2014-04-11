@@ -25,7 +25,8 @@ to start develpment server and script combining.
 
 ##### HTML structure
 
-`<div class="container">
+```
+<div class="container">
     <div class="slider">
         <a class="slide">
             <div class="image"></div>
@@ -36,7 +37,8 @@ to start develpment server and script combining.
         <div class="pager next" data-target="next">&rsaquo;</div>
         <ul class="pager-list"></ul>
     </div>
-</div>`
+</div>
+```
 
 Please use the included stylesheet to make sure all the containers are styles correctly. You can actually put anything inside the "slide" container. It's quite flexible and content should just fill container.
 
