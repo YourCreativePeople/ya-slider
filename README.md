@@ -38,7 +38,7 @@ to start develpment server and script combining.
         <ul class="pager-list"></ul>
     </div>
 </div>
-```
+``` 
 
 Please use the included stylesheet to make sure all the containers are styles correctly. You can actually put anything inside the "slide" container. It's quite flexible and content should just fill container.
 
