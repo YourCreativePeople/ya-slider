@@ -68,6 +68,7 @@
         width:              0,
         height:             0,
         activeSlide:        0,
+        originalTotal:      0,
         totalSlides:        0,
         pagerTotal:         0,
         $slides:            null,
@@ -161,11 +162,12 @@
             // Set up slides
             this.vars.$slides = this.vars.container.children();
             this.vars.totalSlides = this.vars.$slides.length;
+            this.vars.originalTotal = this.vars.totalSlides;
             this.vars.pagerTotal = this.vars.totalSlides;
 
             this.vars.slidePos = new Array(this.vars.totalSlides);
 
-            if (this.vars.totalSlides == 1) {
+            if (this.vars.totalSlides === 1) {
                 var imageSelector = this.vars.containerSelector + ".no-touch " + this.vars.slideSelector + " .image";
                 var captionSelector = this.vars.containerSelector + ".no-touch " + this.vars.slideSelector + " .caption";
                 $(imageSelector).css('opacity', 1);
@@ -180,9 +182,10 @@
 
             /* If only 2 slides exist
                 Duplicate each one */
-            if (browser.transitions && this.vars.totalSlides < 3) {
+            if (browser.transitions && this.vars.totalSlides === 2) {
                 this.vars.$slides[0].parentNode.appendChild(this.vars.$slides[0].cloneNode(true));
-                this.vars.$slides[0].parentNode.insertBefore(this.vars.$slides[1].cloneNode(true), this.vars.$slides[0].parentNode.firstChild);
+                this.vars.$slides[0].parentNode.appendChild(this.vars.$slides[1].cloneNode(true));
+                // this.vars.$slides[0].parentNode.insertBefore(this.vars.$slides[1].cloneNode(true), this.vars.$slides[0].parentNode.firstChild);
                 this.vars.$slides = this.vars.container.children();
                 this.vars.totalSlides = 4;
             }
@@ -193,18 +196,28 @@
             /* Set start slide & active slide */
             this.vars.activeSlide = 0;
 
+            console.log("Active Slide: ", this.vars.activeSlide);
+            console.log("Start Slide: ", this.vars.startSlide);
+            console.log("Original Slides: ", this.vars.originalSlides);
+            console.log("Total Slides: ", this.vars.totalSlides);
+
             if (this.vars.startSlide > 0) {
                 if(this.vars.startSlide >= this.vars.totalSlides)
                     this.vars.startSlide = this.vars.totalSlides - 1;
                 this.vars.activeSlide = this.vars.startSlide;
+                console.log(this.vars.activeSlide);
             }
 
             this.vars.$slides.eq(this.vars.activeSlide).addClass('active transition-speed');
 
             /* Add Pagination List elements */
             var pagerList = this.vars.container.next().children('.pager-list');
+            this.vars.pagerList = pagerList;
             for (var i = 0; i < this.vars.pagerTotal; i++)
                 pagerList.append('<li data-index="' + i + '">' + (i+1) + '</li>');
+
+
+            pagerList.children().eq(this.vars.activeSlide).addClass('active');
 
             var that = this; /* temporary storage of this */
 
@@ -553,6 +566,16 @@
                 vars_local.$slides.eq(to).addClass("active transition-speed");
                 vars_local.$slides.eq(vars_local.activeSlide).removeClass("active");
 
+                var pager_from = vars_local.activeSlide, pager_to = to;
+
+                if (vars_local.originalTotal === 2) {
+                    pager_from = pager_from % 2;
+                    pager_to = pager_to % 2;
+                }
+
+                vars_local.pagerList.children().eq(pager_to).addClass("active");
+                vars_local.pagerList.children().eq(pager_from).removeClass("active");
+
                 vars_local.activeSlide = to;
             } else {
                 setTimeout( function(){
@@ -561,7 +584,10 @@
 
                     setTimeout( function(){
                         vars_local.$slides.eq(to).addClass("active");
+                        vars_local.pagerList.children().eq(to).addClass("active");
+
                         vars_local.$slides.eq(vars_local.activeSlide).removeClass("active");
+                        vars_local.pagerList.children().eq(vars_local.activeSlide).removeClass("active");
 
                         vars_local.activeSlide = to;
                         vars_local.touched = 0;
@@ -569,6 +595,8 @@
 
                 }, 1);
             }
+
+
 
             // Slide change Callback
             if (this.vars.slideChange && typeof(this.vars.slideChange) === "function") {
