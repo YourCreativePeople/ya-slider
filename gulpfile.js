@@ -11,7 +11,7 @@ var gulp        = require('gulp'),
     less        = require('gulp-less'),
     minifyCSS   = require('gulp-minify-css');
 
-var EXPRESS_PORT = 4002;
+var EXPRESS_PORT = 4003;
 var EXPRESS_ROOT = __dirname;
 var LIVERELOAD_PORT = 35730;
 
@@ -32,12 +32,12 @@ gulp.task('server', function () {
     console.log('Express Server on Port ' + EXPRESS_PORT);
 });
 
-gulp.task('lr', function () {
-    lr = require('tiny-lr')();
-    lr.listen(LIVERELOAD_PORT);
+// gulp.task('lr', function () {
+//     lr = require('tiny-lr')();
+//     lr.listen(LIVERELOAD_PORT);
 
-    console.log('LiveReload Server on Port ' + LIVERELOAD_PORT);
-});
+//     console.log('LiveReload Server on Port ' + LIVERELOAD_PORT);
+// });
 
 gulp.task('js', function () {
     return gulp.src(paths.scripts)
@@ -73,9 +73,9 @@ function notifyLivereload(event) {
 gulp.task('watch', function () {
     gulp.watch(paths.scripts, ['js']);
     gulp.watch(paths.styles, ['less']);
-    gulp.watch('*.*', notifyLiveReload);
+    // gulp.watch('*.*', notifyLiveReload);
 
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['server', 'lr', 'js', 'less']);
+gulp.task('default', ['server', 'js', 'less']);
