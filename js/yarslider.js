@@ -196,16 +196,10 @@
             /* Set start slide & active slide */
             this.vars.activeSlide = 0;
 
-            console.log("Active Slide: ", this.vars.activeSlide);
-            console.log("Start Slide: ", this.vars.startSlide);
-            console.log("Original Slides: ", this.vars.originalSlides);
-            console.log("Total Slides: ", this.vars.totalSlides);
-
             if (this.vars.startSlide > 0) {
                 if(this.vars.startSlide >= this.vars.totalSlides)
                     this.vars.startSlide = this.vars.totalSlides - 1;
                 this.vars.activeSlide = this.vars.startSlide;
-                console.log(this.vars.activeSlide);
             }
 
             this.vars.$slides.eq(this.vars.activeSlide).addClass('active transition-speed');
@@ -216,11 +210,20 @@
             for (var i = 0; i < this.vars.pagerTotal; i++)
                 pagerList.append('<li data-index="' + i + '">' + (i+1) + '</li>');
 
-
             pagerList.children().eq(this.vars.activeSlide).addClass('active');
 
             var that = this; /* temporary storage of this */
 
+            /* Size Images */
+            var containerHeight = this.vars.container.height();
+            for (var i = 0; i < this.vars.totalSlides; i++) {
+                var image = this.vars.$slides.eq(i).children(':first').children(':first');
+                var top = ((image.height()/2) - (containerHeight/2));
+                image.css({
+                    'position':  'relative',
+                    'top':       top + 'px',
+                });
+            }
 
             /* Event Listeners */
 
@@ -260,6 +263,10 @@
 
             /* Change to active slide */
             this.changeSlides(this.vars.activeSlide, 'fade', this.vars.durationAuto);
+
+            console.log(this.vars.auto);
+            if (this.vars.auto)
+                this.begin();
 
             /* show main container after initializing (no jumping in) */
             this.vars.container.css({'opacity': 1});
@@ -539,7 +546,11 @@
 
         /* -- Non-touch slide changes -- */
         changeSlides: function(to, type, speed) {
+
 			var vars_local = this.vars;
+
+            if (vars_local.auto)
+                this.stop();
 
             if (vars_local.activeSlide === to) return;
 
@@ -596,7 +607,8 @@
                 }, 1);
             }
 
-
+            if (vars_local.auto)
+                this.begin();
 
             // Slide change Callback
             if (this.vars.slideChange && typeof(this.vars.slideChange) === "function") {
@@ -648,13 +660,12 @@
 
         /* Automatic slideshow functions */
         begin: function() {
-
-            this.interval = setTimeout(this.next(), this.vars.auto);
+            var that = this;
+            this.vars.interval = setInterval(function(){ that.next() }, this.vars.auto);
         },
 
         stop: function() {
-            delay = 0;
-            clearTimeout(this.interval);
+            clearTimeout(this.vars.interval);
         }
     };
 
