@@ -625,8 +625,12 @@
             this.vars.slidePos[index] = dist;
         },
 
-        /* Actually translate slide */
+        /* -- Actually translate slide -- */
         translate: function(index, dist, speed) {
+            this.css_translate(index, dist, speed);
+        },
+
+        css_translate: function(index, dist, speed) {
             var slide = this.vars.$slides[index];
             var style = slide && slide.style;
 
@@ -652,6 +656,10 @@
             }
         },
 
+        js_translate: function(index, dist, speed) {
+
+        },
+
         /* utility: a simple positive modulo using slides.length (from swipe.js) */
         circle: function(index) {
 
@@ -665,6 +673,7 @@
         },
 
         stop: function() {
+
             clearTimeout(this.vars.interval);
         }
     };

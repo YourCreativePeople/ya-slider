@@ -3,7 +3,7 @@
 */
 // var lr          = require('tiny-lr');
 var gulp        = require('gulp'),
-    gutil       = require('gulp-util');
+    gutil       = require('gulp-util'),
     uglify      = require('gulp-uglify'),
     concat      = require('gulp-concat'),
     livereload  = require('gulp-livereload'),
