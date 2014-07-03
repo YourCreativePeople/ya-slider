@@ -10,18 +10,20 @@
 
 	<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>-->
 	<script type="text/javascript" src="vendor/js/jquery.newest.min.js"></script>
+	<script src="vendor/js/fastclick.js"></script>
+	<script src="vendor/js/jquery.velocity.js"></script>
+	<script src="vendor/js/velocity.ui.js"></script>
 	<script type="text/javascript" src="js/yarslider.js"></script>
 
 	<script type="text/javascript">
 		$(function(){
+			FastClick.attach(document.body);
+
 			$( ".slider" ).yarslider({
 				'startSlide': 0,
-				'auto': 3000,
 				'controlSelector': '.slider_controls',
 				'slideSelector': '.slide'
 			});
-
-
 		});
 
 	</script>
@@ -29,20 +31,29 @@
 
 <body>
 	<div class="container">
-		<div class="slider" data-slider-options='{"message":"Slider 1"}'>
+		<div class="slider" data-slider-options='{"startSlide":1}'>
 			<a class="slide">
 				<div class="image">
-					<img src="http://static3.businessinsider.com/image/52cddfb169beddee2a6c2246/the-29-coolest-us-air-force-images-of-the-year.jpg"/>
+					<img src="images/airplane.jpg"/>
+				</div>
+				<div class="caption">
+					<p>Airplanes are awesome!</p>
 				</div>
 			</a>
 			<a class="slide">
 				<div class="image">
-					<img src="http://cnjtc.com/wp-content/uploads/2013/04/space-background-images-hd-1080p-wallpapers-download.jpg"/>
+					<img src="images/space.jpg"/>
+				</div>
+				<div class="caption">
+					<p>The Universe</p>
 				</div>
 			</a>
 			<a class="slide">
 				<div class="image">
-					<img src="http://blog.gettyimages.com/wp-content/uploads/2013/08/Jennifer-Lawrence-Bradley-Cooper-Oscars-2013-Christopher-Polk-Getty-Images-162549463.jpg"/>
+					<img src="images/jlaw.jpg"/>
+				</div>
+				<div class="caption">
+					<p>Jlaw (and Brad Cooper)</p>
 				</div>
 			</a>
 		</div>
@@ -53,8 +64,8 @@
 	    </div>
 	</div> <!-- End .container -->
 
-	<div class="container">
-		<div class="slider" data-slider-options='{"message":"Slider 2"}'>
+	<!-- <div class="container">
+		<div class="slider">
 			<a class="slide">
 				<div class="image">
 					<img src="http://static3.businessinsider.com/image/52cddfb169beddee2a6c2246/the-29-coolest-us-air-force-images-of-the-year.jpg"/>
@@ -71,7 +82,7 @@
 			<div class="pager next" data-target="next">&rsaquo;</div>
 	 		<ul class="pager-list"></ul>
 	    </div>
-	</div><!-- End .container -->
+	</div>-->
 
 </body> <!-- End Body -->
 

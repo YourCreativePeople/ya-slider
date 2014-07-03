@@ -3,22 +3,27 @@
   "version": "0.1.1",
   "description": "YarSlider is a slider that just works (or it will... eventually)",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/YourCreativePeople/ya-slider"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "BSD-2-Clause",
   "devDependencies": {
-    "gulp": "~3.5.2",
-    "gulp-util": "~2.2.14",
-    "gulp-concat": "~2.1.7",
-    "gulp-minify-css": "~0.3.0",
-    "gulp-livereload": "~1.1.1",
-    "gulp-watch": "~0.5.0",
-    "gulp-uglify": "~0.2.1",
-    "gulp-less": "~1.2.1",
-    "tiny-lr": "0.0.5",
+    "connect-livereload": "~0.3.2",
     "express": "~3.5.0",
-    "connect-livereload": "~0.3.2"
+    "gulp": "^3.8.5",
+    "gulp-concat": "~2.1.7",
+    "gulp-filesize": "0.0.6",
+    "gulp-less": "~1.2.1",
+    "gulp-livereload": "~1.1.1",
+    "gulp-minify-css": "~0.3.0",
+    "gulp-uglify": "~0.2.1",
+    "gulp-util": "~2.2.14",
+    "gulp-watch": "~0.5.0",
+    "tiny-lr": "0.0.5"
   }
 }

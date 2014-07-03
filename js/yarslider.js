@@ -12,7 +12,7 @@
 
     'use strict';
     var pluginName = "yarslider";
-    var version = '1.0.0';
+    var version = '1.4.0';
 
     /* ------------------------------
      * |          Utilities         |
@@ -93,7 +93,7 @@
      * |    Plugin Defaults      |
      * --------------------------- */
     var defaults = {
-        startSlide:         0,		/* Start slide (starts at 0);
+        startSlide:         0,		/* Start slide (starts at 0); */
         durationManual:     500,	/* Duration for manual slide change (fade) */
         durationAuto:       200,	/* Duration for automatic slide change (fade) */
         continuous:         true,	/* Wrap slideshow around ends */
@@ -167,6 +167,7 @@
 
             this.vars.slidePos = new Array(this.vars.totalSlides);
 
+            /* Single slide case */
             if (this.vars.totalSlides === 1) {
                 var imageSelector = this.vars.containerSelector + ".no-touch " + this.vars.slideSelector + " .image";
                 var captionSelector = this.vars.containerSelector + ".no-touch " + this.vars.slideSelector + " .caption";
@@ -185,7 +186,6 @@
             if (browser.transitions && this.vars.totalSlides === 2) {
                 this.vars.$slides[0].parentNode.appendChild(this.vars.$slides[0].cloneNode(true));
                 this.vars.$slides[0].parentNode.appendChild(this.vars.$slides[1].cloneNode(true));
-                // this.vars.$slides[0].parentNode.insertBefore(this.vars.$slides[1].cloneNode(true), this.vars.$slides[0].parentNode.firstChild);
                 this.vars.$slides = this.vars.container.children();
                 this.vars.totalSlides = 4;
             }
@@ -202,7 +202,28 @@
                 this.vars.activeSlide = this.vars.startSlide;
             }
 
-            this.vars.$slides.eq(this.vars.activeSlide).addClass('active transition-speed');
+            this.vars.$slides.eq(this.vars.activeSlide).addClass('active');
+
+            /* set initial opacity and such */
+            var pos = this.vars.totalSlides;
+
+            while (pos--) {
+                this.vars.$slides.eq(pos).children('.image').css({
+                    'opacity'   :   '0',
+                });
+                this.vars.$slides.eq(pos).children('.caption').css({
+                    'opacity'   :   '0',
+                });
+            }
+
+            this.vars.$slides.eq(this.vars.activeSlide).children('.image').css({
+                'opacity':'1'
+            });
+
+            this.vars.$slides.eq(this.vars.activeSlide).children('.caption').css({
+                'opacity':'1'
+            });
+
 
             /* Add Pagination List elements */
             var pagerList = this.vars.container.next().children('.pager-list');
@@ -216,14 +237,14 @@
 
             /* Size Images */
             var containerHeight = this.vars.container.height();
-            for (var i = 0; i < this.vars.totalSlides; i++) {
-                var image = this.vars.$slides.eq(i).children(':first').children(':first');
-                var top = ((image.height()/2) - (containerHeight/2));
-                image.css({
-                    'position':  'relative',
-                    'top':       top + 'px',
-                });
-            }
+            // for (var i = 0; i < this.vars.totalSlides; i++) {
+            //     var image = this.vars.$slides.eq(i).children(':first').children(':first');
+            //     var top = ((image.height()/2) - (containerHeight/2));
+            //     image.css({
+            //         'position':  'relative',
+            //         'top':       top + 'px',
+            //     });
+            // }
 
             /* Event Listeners */
 
@@ -264,7 +285,7 @@
             /* Change to active slide */
             this.changeSlides(this.vars.activeSlide, 'fade', this.vars.durationAuto);
 
-            console.log(this.vars.auto);
+            /* Start Auto Slideshow */
             if (this.vars.auto)
                 this.begin();
 
@@ -340,7 +361,7 @@
             this.vars.touched += 1;
 
             $(this.vars.container).removeClass('no-touch');
-            this.vars.$slides.eq(this.vars.activeSlide).removeClass("transition-speed");
+
             // measure start values
             this.vars.start = {
                 // get initial touch coords
@@ -362,14 +383,13 @@
             if (this.vars.touched == 1) {
                 while(pos--) {
                     var slide = this.vars.$slides[pos];
-
                     slide.style.width = this.vars.width + 'px';
-                    slide.setAttribute('data-index', pos);
+                    // slide.setAttribute('data-index', pos);
 
-                    this.vars.$slides.eq(pos).removeClass("transition-speed");
-
-                    if (browser.transitions) {
+                    // if (browser.transitions) {
                         slide.style.opacity = 1;
+                        slide.childNodes[1].style.opacity = 1;
+                        slide.childNodes[3].style.opacity = 1;
 
                         if ( pos == this.vars.totalSlides - 1 && this.vars.activeSlide === 0 ) {
                             this.vars.slidePos[pos] = -((this.vars.activeSlide + 1) * this.vars.width);
@@ -384,7 +404,7 @@
                             if (this.vars.touched == 1)
                                 this.translate(pos, ((pos * this.vars.width) - (this.vars.activeSlide * this.vars.width)), 0);
                         }
-                    }
+                    // }
                 }
             }
 
@@ -502,9 +522,6 @@
                         this.vars.activeSlide = this.circle(this.vars.activeSlide-1);
                     }
 
-
-                    // this.vars.callback && this.vars.callback(this.vars.activeSlide, slides[this.vars.activeSlide]);
-
                     this.vars.$slides.eq(this.vars.activeSlide).addClass("active");
                     this.vars.$slides.eq(from).removeClass("active");
 
@@ -549,32 +566,60 @@
 
 			var vars_local = this.vars;
 
-            if (vars_local.auto)
-                this.stop();
-
+            if (vars_local.auto) this.stop();
             if (vars_local.activeSlide === to) return;
-
-            if (vars_local.activeSlide < to && to == vars_local.totalSlides)
-                to = 0;
-
-            if (vars_local.activeSlide > to && to < 0)
-                to = vars_local.totalSlides - 1;
+            if (vars_local.activeSlide < to && to == vars_local.totalSlides) to = 0;
+            if (vars_local.activeSlide > to && to < 0) to = vars_local.totalSlides - 1;
 
             var pos = vars_local.totalSlides;
 
-            while (pos--) {
-                vars_local.$slides.eq(pos).css({
-                    'opacity'   :   '',
-                    '-webkit-transition'    :   '',
-                    'transition'            :   '',
-                    'width'                 :   '',
-                    '-webkit-transform'     :   '',
-                    'transform'             :   ''
+            if (vars_local.touched) {
+                while (pos--) {
+                    vars_local.$slides.eq(pos).css({
+                        'opacity'   :   '',
+                        '-webkit-transition'    :   '',
+                        'transition'            :   '',
+                        'width'                 :   '',
+                        '-webkit-transform'     :   '',
+                        'transform'             :   ''
+                    });
+                    vars_local.$slides.eq(pos).children('.image').css({
+                        'opacity':'0',
+                        'display':''
+                    });
+                    vars_local.$slides.eq(pos).children('.caption').css({
+                        'opacity':'0',
+                        'display':''
+                    });
+                }
+                vars_local.$slides.eq(vars_local.activeSlide).children('.image').css({
+                    'opacity':'1'
                 });
+                vars_local.$slides.eq(vars_local.activeSlide).children('.caption').css({
+                    'opacity':'1'
+                })
             }
 
-            if (!vars_local.touched) {
-                vars_local.$slides.eq(to).addClass("active transition-speed");
+            setTimeout(function() {
+                /* Animate new slide in / old slide out */
+                vars_local.$slides.eq(to).children('.image')
+                    .velocity("stop")
+                    .velocity("transition.shrinkIn", { duration: 800 });
+
+                vars_local.$slides.eq(to).children('.caption')
+                    .velocity("stop")
+                    .velocity("fadeIn", { duration: 500 });
+
+                vars_local.$slides.eq(vars_local.activeSlide).children('.image')
+                    .velocity("stop")
+                    .velocity("fadeOut", { duration: 500 });
+
+                vars_local.$slides.eq(vars_local.activeSlide).children('.caption')
+                    .velocity("stop")
+                    .velocity("fadeOut", { duration: 500 });
+
+                /* set slide active class */
+                vars_local.$slides.eq(to).addClass("active");
                 vars_local.$slides.eq(vars_local.activeSlide).removeClass("active");
 
                 var pager_from = vars_local.activeSlide, pager_to = to;
@@ -584,36 +629,22 @@
                     pager_to = pager_to % 2;
                 }
 
+                /* set pager list active class */
                 vars_local.pagerList.children().eq(pager_to).addClass("active");
                 vars_local.pagerList.children().eq(pager_from).removeClass("active");
 
                 vars_local.activeSlide = to;
-            } else {
-                setTimeout( function(){
-                    vars_local.$slides.eq(to).addClass("transition-speed");
-                    vars_local.$slides.eq(vars_local.activeSlide).addClass("transition-speed");
+                vars_local.touched = 0;
 
-                    setTimeout( function(){
-                        vars_local.$slides.eq(to).addClass("active");
-                        vars_local.pagerList.children().eq(to).addClass("active");
+                if (vars_local.auto)
+                    this.begin();
 
-                        vars_local.$slides.eq(vars_local.activeSlide).removeClass("active");
-                        vars_local.pagerList.children().eq(vars_local.activeSlide).removeClass("active");
+                // Slide change Callback
+                if (this.vars.slideChange && typeof(this.vars.slideChange) === "function") {
+                    this.vars.slideChange();
+                }
+            }, 1);
 
-                        vars_local.activeSlide = to;
-                        vars_local.touched = 0;
-                    }, 1);
-
-                }, 1);
-            }
-
-            if (vars_local.auto)
-                this.begin();
-
-            // Slide change Callback
-            if (this.vars.slideChange && typeof(this.vars.slideChange) === "function") {
-                this.vars.slideChange();
-            }
         },
 
         /* -- Add transition support for older browsers -- */
@@ -621,7 +652,7 @@
 
         /* -- Touch slide changes -- */
         move: function(index, dist, speed) {
-            this.translate(index, dist, speed);
+            this.css_translate(index, dist, speed);
             this.vars.slidePos[index] = dist;
         },
 
@@ -638,6 +669,8 @@
             var stylePrev = slidePrev && slidePrev.style;
 
             if (!style) return;
+
+            //$.Velocity.animate(slide, { translateX: dist + 'px' }, { duration: 1 });
 
             style.webkitTransitionDuration =
             style.MozTransitionDuration =

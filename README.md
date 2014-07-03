@@ -69,4 +69,10 @@ Ya-slider can take additional parameters on init.
 - **transitionEnd** Function - Callback on transition end
 - **initFinished** Function - Callback after init
 
+### Multiple sliders on page
+
+Ya-slider can accomodate multiple sliders on the page. The reommended way to do this is by a global standard init by class, then configure each slider using a 'data-slider-options' attribute. You can put any standard config option here and it will override the default init statement.
+
+`<div class="slider" data-slider-options='{"startSlide":1, "auto": 4000}'></div>`
+
 
